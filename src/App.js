@@ -38,20 +38,20 @@ class App extends Component {
   aItemADD(event) {
     let { aItem, jsonItem } = this.state;
     aItem.push(this.state.inputValue);
-    jsonItem.push([
-      { name: this.state.inputValue, child: [{ sss: "sss", sdw: [{ like: 222 }] }, { ddd: "ddd" }] },
-      { name: 111, like: "2" }
-    ])
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({
-        aItem: aItem,
-        jsonItem: jsonItem,
-        visible: false,
-        inputValue: "",
-        loading: false 
+    // http://fengyitong.name:8095/api/test/gettest?name=0
+    fetch(this.state.inputValue).then(res => {
+      res.json().then(data => {
+        // console.log(data);
+        jsonItem.push(data)
+        this.setState({
+          aItem: aItem,
+          jsonItem: jsonItem,
+          visible: false,
+          inputValue: "",
+          loading: false
+        })
       })
-    }, 300);
+    });
 
   }
   aItemRemove(event) {
@@ -77,9 +77,10 @@ class App extends Component {
     }) : <div>无数据</div>
     let jsonItemLength = jsonItem.length;
     let listTree = jsonItem.map((value, index) => {
+      console.log(jsonItem[0])
       return (
         <Col span={24 / jsonItemLength} key={`${index}${Math.random(100)}`}>
-          <TreeItem data={value} />
+          <TreeItem data={value} flgdata={jsonItem[0]} />
         </Col>
       )
     });
