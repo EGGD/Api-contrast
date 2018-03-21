@@ -77,7 +77,6 @@ class App extends Component {
     }) : <div>无数据</div>
     let jsonItemLength = jsonItem.length;
     let listTree = jsonItem.map((value, index) => {
-      console.log(jsonItem[0])
       return (
         <Col span={24 / jsonItemLength} key={`${index}${Math.random(100)}`}>
           <TreeItem data={value} flgdata={jsonItem[0]} />
