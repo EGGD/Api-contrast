@@ -12,9 +12,9 @@ class TreeItem extends Component {
     //当字段为字符串类型就调用下面的字符串方法
     if (typeof (data) === 'object') {
       list.push(
-        <TreeNode title="" key={`${Math.random(100)}`} >
-          {this.onShowObj(data, flgdata)}
-        </TreeNode>
+        // <TreeNode title="" key={`${Math.random(100)}`} >
+          this.onShowObj(data, flgdata)
+        // </TreeNode>
       )
     } else {
       for (let i = 0; i < data.length; i++) {
@@ -26,9 +26,9 @@ class TreeItem extends Component {
             const flgelement = flgtemp.hasOwnProperty(key) ? flgtemp[key] : null;
             if (typeof (element) === 'object') {
               list.push(
-                <TreeNode title={`${key}`} key={`${i}${Math.random(100)}`} >
-                  {this.onShowTreeNodeChild(element, flgelement)}
-                </TreeNode>
+                // <TreeNode title={`${key}`} key={`${i}${Math.random(100)}`} >
+                  this.onShowTreeNodeChild(element, flgelement)
+                // </TreeNode>
               )
             } else {
               if (element === flgelement) {
@@ -55,24 +55,25 @@ class TreeItem extends Component {
           list.push(<TreeNode title={
             <span style={{ color: '#1890ff' }}>{`${key}:${element}`}</span>
           } key={`${key}${Math.random(100)}`} />)
-          return list
-        }
-        const flgelement = flgdata.hasOwnProperty(key) ? flgdata[key] : null;
-        if (typeof (element) === 'object') {
-          list.push(
-            <TreeNode title={`${key}`} key={`${key}${Math.random(100)}`} >
-              {this.onShowTreeNodeChild(element, flgelement)}
-            </TreeNode>
-          )
         } else {
-          if (element === flgelement) {
-            list.push(<TreeNode title={`${key}:${element}`} key={`${key}${Math.random(100)}`} />)
+          const flgelement = flgdata.hasOwnProperty(key) ? flgdata[key] : null;
+          if (typeof (element) === 'object') {
+            list.push(
+              <TreeNode title={`${key}`} key={`${key}${Math.random(100)}`} >
+                {this.onShowTreeNodeChild(element, flgelement)}
+              </TreeNode>
+            )
           } else {
-            list.push(<TreeNode title={
-              <span style={{ color: '#1890ff' }}>{`${key}:${element}`}</span>
-            } key={`${key}${Math.random(100)}`} />)
+            if (element === flgelement) {
+              list.push(<TreeNode title={`${key}:${element}`} key={`${key}${Math.random(100)}`} />)
+            } else {
+              list.push(<TreeNode title={
+                <span style={{ color: '#1890ff' }}>{`${key}:${element}`}</span>
+              } key={`${key}${Math.random(100)}`} />)
+            }
           }
         }
+
       }
     }
     return list;
