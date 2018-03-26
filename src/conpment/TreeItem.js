@@ -13,7 +13,7 @@ class TreeItem extends Component {
     if (typeof (data) === 'object') {
       list.push(
         // <TreeNode title="" key={`${Math.random(100)}`} >
-          this.onShowObj(data, flgdata)
+        this.onShowObj(data, flgdata)
         // </TreeNode>
       )
     } else {
@@ -27,7 +27,7 @@ class TreeItem extends Component {
             if (typeof (element) === 'object') {
               list.push(
                 // <TreeNode title={`${key}`} key={`${i}${Math.random(100)}`} >
-                  this.onShowTreeNodeChild(element, flgelement)
+                this.onShowTreeNodeChild(element, flgelement)
                 // </TreeNode>
               )
             } else {
@@ -51,13 +51,13 @@ class TreeItem extends Component {
       if (data.hasOwnProperty(key)) {
         const element = data[key];
         //判断新加语句的时候直接就返回当前语句
-        if (flgdata === null) {
+        if (flgdata === null && data !== '') {
           list.push(<TreeNode title={
             <span style={{ color: '#1890ff' }}>{`${key}:${element}`}</span>
           } key={`${key}${Math.random(100)}`} />)
         } else {
           const flgelement = flgdata.hasOwnProperty(key) ? flgdata[key] : null;
-          if (typeof (element) === 'object') {
+          if (typeof (element) === 'object' && element !== null) {
             list.push(
               <TreeNode title={`${key}`} key={`${key}${Math.random(100)}`} >
                 {this.onShowTreeNodeChild(element, flgelement)}
