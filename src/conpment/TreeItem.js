@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Tree } from 'antd';
-import { Object } from 'core-js';
 const TreeNode = Tree.TreeNode;
 
 class TreeItem extends Component {
